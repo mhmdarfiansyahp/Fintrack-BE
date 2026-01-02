@@ -23,4 +23,13 @@ class DebtsService
     {
         $debts->delete();
     }
+
+    public function getTopDebtsForDashboard(int $limit = 5)
+    {
+        return Debts::where('type', 'debt')
+            ->where('status', 'pending')
+            ->orderByDesc('amount')
+            ->limit($limit)
+            ->get();
+    }
 }

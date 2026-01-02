@@ -23,4 +23,15 @@ class WishlistService
     {
         $wishlist->delete();
     }
+
+    public function getTopWishlistForDashboard(int $limit = 5)
+    {
+        return Wishlist::orderByDesc('saved_amount')
+            ->limit($limit)
+            ->get()
+            ->map(function ($item) {
+                $item->progress = round(($item->saved_amount / $item->target_amount) * 100);
+                return $item;
+            });
+    }
 }

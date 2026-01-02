@@ -60,4 +60,16 @@ class TransactionsController extends Controller
 
         return ApiResponse::statusDeleted();
     }
+
+    public function weekly()
+    {
+        return response()->json(
+            $this->transactionsService->weekly()
+        );
+    }
+    
+    public function expenseCategories()
+    {
+        return $this->transactionsService->expenseCategories();
+    }
 }

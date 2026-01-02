@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class DebtsController extends Controller
 {
-    public function __construct(private readonly DebtsService $debtsService)
-    {
-    }
+    public function __construct(private readonly DebtsService $debtsService) {}
     /**
      * Display a listing of the resource.
      */
@@ -61,5 +59,14 @@ class DebtsController extends Controller
         $this->debtsService->delete($debts);
 
         return ApiResponse::statusOk();
+    }
+
+    public function topDebts()
+    {
+        // Memanggil service untuk ambil top 5 debt terbesar
+        $debts = $this->debtsService->getTopDebtsForDashboard();
+
+        // Kembalikan data dengan format API yang sama
+        return ApiResponse::statusOk($debts);
     }
 }

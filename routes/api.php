@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
+Route::get('/transactions/weekly', [TransactionsController::class, 'weekly']);
+Route::get('/transactions/expense-categories', [TransactionsController::class, 'expenseCategories']);
+Route::get('/debts/top', [DebtsController::class, 'topDebts']);
+Route::get('/wishlist/top', [WishlistController::class, 'topWishlist']);
+
+
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('transactions', TransactionsController::class);
 Route::apiResource('debts', DebtsController::class);

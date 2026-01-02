@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
-    public function __construct(private readonly WishlistService $wishlistService)
-    {
-    }
+    public function __construct(private readonly WishlistService $wishlistService) {}
     /**
      * Display a listing of the resource.
      */
@@ -61,5 +59,11 @@ class WishlistController extends Controller
         $this->wishlistService->delete($wishlist);
 
         return ApiResponse::statusOk();
+    }
+
+    public function topWishlist()
+    {
+        $wishlists = $this->wishlistService->getTopWishlistForDashboard();
+        return ApiResponse::statusOk($wishlists);
     }
 }
